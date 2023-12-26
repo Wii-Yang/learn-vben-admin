@@ -1,4 +1,4 @@
-##  项目创建流程
+## 项目创建流程
 
 ### 一、使用 vite 创建项目
 
@@ -11,6 +11,7 @@ pnpm create vite my-vue-app --template vue-ts
 #### 1、删除 tsconfig.node.json 文件
 
 #### 2、修改 tsconfig.json
+
 ```json
 {
   // 编译器选项
@@ -110,5 +111,43 @@ pnpm create vite my-vue-app --template vue-ts
   ],
   // 指定在解析include时应跳过的文件名或模式的数组
   "exclude": ["node_modules", "dist", "**/*.js"]
+}
+```
+
+### 三、安装并配置 Prettier
+
+#### 1、安装 Prettier
+
+```shell
+pnpm add --save-dev --save-exact prettier
+```
+
+#### 2、安装`prettier-plugin-packagejson`插件
+
+```shell
+pnpm add --save-dev --save-exact prettier-plugin-packagejson
+```
+
+#### 3、创建`.prettierrc`文件
+
+```json
+{
+  "plugins": ["prettier-plugin-packagejson"],
+  "printWidth": 100,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "proseWrap": "never",
+  "htmlWhitespaceSensitivity": "strict",
+  "vueIndentScriptAndStyle": true,
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": ".*rc",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
 }
 ```
