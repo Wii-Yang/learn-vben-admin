@@ -5,3 +5,110 @@
 ```shell
 pnpm create vite my-vue-app --template vue-ts
 ```
+
+### 二、配置 TS
+
+#### 1、删除 tsconfig.node.json 文件
+
+#### 2、修改 tsconfig.json
+```json
+{
+  // 编译器选项
+  "compilerOptions": {
+    /** Type Checking **/
+    // 在表达式和声明上有隐含的 any类型时报错
+    "noImplicitAny": false,
+    // 当处理使用继承的类时，子类可能会与在基类中重命名时重载的函数“不同步”
+    "noImplicitOverride": true,
+    // 报告未使用的局部变量的错误
+    "noUnusedLocals": true,
+    // 报告函数中未使用参数的错误
+    "noUnusedParameters": false,
+    // 严格标志可以实现广泛的类型检查行为，从而为程序的正确性提供更强的保证
+    "strict": true,
+    // 允许将catch子句中变量的类型从any更改为unknown
+    "useUnknownInCatchVariables": false,
+
+    /** Modules **/
+    // 基准目录
+    "baseUrl": ".",
+    // 设置程序的模块系统
+    "module": "ESNext",
+    // 指定模块解析策略
+    "moduleResolution": "node",
+    // 一些将模块导入重新映射到相对于 baseUrl 路径的配置
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
+    },
+    // 允许导入扩展名为“.json”的模块
+    "resolveJsonModule": true,
+    // 默认情况下，所有 可见 的 ”@types” 包都将包含在你的编译过程中
+    "types": ["vite/client"],
+
+    /** Emit **/
+    // 生成相应的 .d.ts文件
+    "declaration": false,
+    // 为.d.ts文件生成源映射，这些文件映射回原始的.ts源文件
+    "declarationMap": false,
+    // 将代码与sourcemaps生成到一个文件中，要求同时设置了 --inlineSourceMap或 --sourceMap属性
+    "inlineSources": false,
+    // 当转换为 JavaScript 时，忽略所有 TypeScript 文件中的注释
+    "removeComments": true,
+
+    /** JavaScript Support **/
+
+    /** Editor Support **/
+
+    /** Interop Constraints **/
+    // ES 模块互操作性
+    "esModuleInterop": true,
+    // TypeScript遵循其运行的文件系统的区分大小写规则
+    "forceConsistentCasingInFileNames": true,
+    // 将每个文件作为单独的模块（与“ts.transpileModule”类似）
+    "isolatedModules": true,
+
+    /** Backwards Compatibility **/
+
+    /** Language and Environment **/
+    // 启用实验性的ES装饰器
+    "experimentalDecorators": true,
+    // 在 .tsx文件里支持JSX： "React"或 "Preserve"
+    "jsx": "preserve",
+    // 编译过程中需要引入的库文件的列表
+    "lib": ["ESNext", "DOM"],
+    // 指定ECMAScript目标版本
+    "target": "ESNext",
+
+    /** Compiler Diagnostics **/
+
+    /** Projects **/
+    // 选项会强制执行某些约束，使得构建工具可以快速确定一个工程是否已经建立
+    "composite": false,
+
+    /** Output Formatting **/
+    // 是否将过时的控制台输出保持在监视模式，而不是每次发生更改时都清除屏幕
+    "preserveWatchOutput": true,
+
+    /** Completeness **/
+    // 跳过声明文件的类型检查
+    "skipLibCheck": true
+  },
+  // 指定要包含在程序中的文件名或模式的数组
+  "include": [
+    "tests/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "build/**/*.ts",
+    "build/**/*.d.ts",
+    "mock/**/*.ts",
+    "vite.config.ts"
+  ],
+  // 指定在解析include时应跳过的文件名或模式的数组
+  "exclude": ["node_modules", "dist", "**/*.js"]
+}
+```
